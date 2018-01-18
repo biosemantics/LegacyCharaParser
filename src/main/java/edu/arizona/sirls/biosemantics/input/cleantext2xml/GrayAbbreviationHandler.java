@@ -23,7 +23,7 @@ public class GrayAbbreviationHandler implements Comparator{
 	static{ 
 		//this mapping was taken directly from Gray's
 		//"X" crossed with, for a hybrid
-		//"§" section
+		//"ï¿½" section
 		//abbs used in descriptions
 		abbs.put("Abund.", "abundant");
 		abbs.put("Adj.", "adjacent");
@@ -225,7 +225,7 @@ public class GrayAbbreviationHandler implements Comparator{
 	}
 
 
-	@Override
+
 	public int compare(Object str1, Object str2) {
 		if(((String)str1).length() > ((String)str2).length()) return -1;
 		if(((String)str1).length() < ((String)str2).length()) return 1;

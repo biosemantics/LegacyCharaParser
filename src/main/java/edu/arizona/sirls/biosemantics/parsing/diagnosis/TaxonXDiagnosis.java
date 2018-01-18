@@ -175,7 +175,7 @@ public class TaxonXDiagnosis implements IDiagnosis {
 	 * @see edu.arizona.sirls.biosemantics.parsing.diagnosis.IDiagnosis#parseDiagnosis()
 	 */
 	
-	@Override
+	
 	public ArrayList<Pattern> parseDiagnosis() throws JDOMException {
 		//collecting text
 		ArrayList<String> texts = new ArrayList<String> ();

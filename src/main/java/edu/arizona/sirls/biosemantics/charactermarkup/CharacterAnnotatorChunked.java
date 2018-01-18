@@ -3657,6 +3657,7 @@ public class CharacterAnnotatorChunked {
 	private Element annotatedMeasurements(String measurements, ChunkedSentence cs) {//added cs
 		measurements = measurements.replaceAll("([Ff]igure|[Ff]igs?\\.)[^A-Z]*", "");
 		measurements = measurements.replaceAll("�", "-");
+
 		Element whole  = new Element("whole_organism");
 		//this.statement.addContent(whole);
 		ArrayList<Element> parent = new ArrayList<Element>();
