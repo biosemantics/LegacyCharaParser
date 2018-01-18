@@ -25,10 +25,10 @@ import edu.arizona.sirls.biosemantics.parsing.MainForm;
 import edu.arizona.sirls.biosemantics.parsing.PhraseMarker;
 import edu.arizona.sirls.biosemantics.parsing.state.StateCollector;
 import edu.arizona.sirls.biosemantics.parsing.state.WordNetWrapper;
-import edu.smu.tspell.wordnet.NounSynset;
-import edu.smu.tspell.wordnet.Synset;
-import edu.smu.tspell.wordnet.SynsetType;
-import edu.smu.tspell.wordnet.WordNetDatabase;
+//import edu.smu.tspell.wordnet.NounSynset;
+//import edu.smu.tspell.wordnet.Synset;
+//import edu.smu.tspell.wordnet.SynsetType;
+//import edu.smu.tspell.wordnet.WordNetDatabase;
 
 import java.util.ArrayList;
 import java.util.regex.*;
@@ -808,7 +808,7 @@ public class Utilities {
 		if(word.compareTo("becoming")==0){
 			return true;
 		}
-		if(word.compareTo("±")==0){
+		if(word.compareTo("ï¿½")==0){
 			return true;
 		}
 		if(!word.matches(".*?[a-z]+.*")){
@@ -860,8 +860,8 @@ public class Utilities {
 		if(w.trim().length()==0 || w.matches("\\W+")) return null; //w = "?"
 		if(w.contains("[")) return null;
 		if(w.indexOf(" ")>0) w = w.substring(w.lastIndexOf(" ")+1).trim();
-		//w = w.replaceAll("[{}<>()]", "").replaceAll("\\d+[–-]", "_").replaceAll("[–_]", "-")./*replaceAll(" ", "").*/replaceAll("_+", "_");//"(3-)5-merous" =>_merous
-		w = w.replaceAll("[{}<>()]", "").replaceAll("\\d+[_–-]", "").replaceAll("[–_]", "-")./*replaceAll(" ", "").*/replaceAll("_+", "_");//"(3-)5-merous" =>merous
+		//w = w.replaceAll("[{}<>()]", "").replaceAll("\\d+[ï¿½-]", "_").replaceAll("[ï¿½_]", "-")./*replaceAll(" ", "").*/replaceAll("_+", "_");//"(3-)5-merous" =>_merous
+		w = w.replaceAll("[{}<>()]", "").replaceAll("\\d+[_ï¿½-]", "").replaceAll("[ï¿½_]", "-")./*replaceAll(" ", "").*/replaceAll("_+", "_");//"(3-)5-merous" =>merous
 		w = w.replaceFirst(".*?_(?=[a-z]+$)", ""); //_or_ribbed
 		String wc = w;
 		String[] ch = characterhash.get(w);
@@ -1016,7 +1016,7 @@ public class Utilities {
 	 	public static String lookupCharacter(String w, Connection conn, Hashtable<String, String> characterhash, String glosstable, String prefix) {
 		if(w.trim().length()==0) return null;
 		if(w.indexOf(" ")>0) w = w.substring(w.lastIndexOf(" ")+1).trim();
-		w = w.replaceAll("[{}<>()]", "").replaceAll("\\d+[–-]", "_").replaceAll("[–_]", "-").replaceAll("_+", "_");//"(3-)5-merous" =>_merous
+		w = w.replaceAll("[{}<>()]", "").replaceAll("\\d+[ï¿½-]", "_").replaceAll("[ï¿½_]", "-").replaceAll("_+", "_");//"(3-)5-merous" =>_merous
 		w = w.replaceFirst(".*?_(?=[a-z]+$)", ""); //_or_ribbed
 		String wc = w;
 		String ch = characterhash.get(w);
@@ -1281,16 +1281,16 @@ public class Utilities {
 		if(strcp.length() != str.length()) hidden = true;
 		//threeing
 		str = str.replaceAll("(?<=\\d)-(?=\\{)", " - "); //this is need to keep "-" in 5-{merous} after 3ed (3-{merous} and not 3 {merous}) 
-		//Pattern pattern3 = Pattern.compile("[\\d]+[\\-\\–]+[\\d]+");
+		//Pattern pattern3 = Pattern.compile("[\\d]+[\\-\\ï¿½]+[\\d]+");
 		//Pattern pattern3 = Pattern.compile(NumericalHandler.numberpattern);
-		//Pattern pattern4 = Pattern.compile("(?<!(ca[\\s]?|diam[\\s]?))([\\d]?[\\s]?\\.[\\s]?[\\d]+[\\s]?[\\–\\-]+[\\s]?[\\d]?[\\s]?\\.[\\s]?[\\d]+)|([\\d]+[\\s]?[\\–\\-]+[\\s]?[\\d]?[\\s]?\\.[\\s]?[\\d]+)|([\\d]/[\\d][\\s]?[\\–\\-][\\s]?[\\d]/[\\d])|(?<!(ca[\\s]?|diam[\\s]?))([\\d]?[\\s]?\\.[\\s]?[\\d]+)|([\\d]/[\\d])");
-		//Pattern pattern5 = Pattern.compile("[\\d±\\+\\–\\-\\—°²:½/¼\"“”\\_´\\×µ%\\*\\{\\}\\[\\]=]+");
-		//Pattern pattern5 = Pattern.compile("[\\d\\+°²½/¼\"“”´\\×µ%\\*]+(?!~[a-z])");
-		Pattern pattern5 = Pattern.compile("[\\d\\+°²½/¼\"“”´\\×µ%\\*]+(?![a-z])"); //single numbers, not including individual "-", would turn 3-branched to 3 branched 
+		//Pattern pattern4 = Pattern.compile("(?<!(ca[\\s]?|diam[\\s]?))([\\d]?[\\s]?\\.[\\s]?[\\d]+[\\s]?[\\ï¿½\\-]+[\\s]?[\\d]?[\\s]?\\.[\\s]?[\\d]+)|([\\d]+[\\s]?[\\ï¿½\\-]+[\\s]?[\\d]?[\\s]?\\.[\\s]?[\\d]+)|([\\d]/[\\d][\\s]?[\\ï¿½\\-][\\s]?[\\d]/[\\d])|(?<!(ca[\\s]?|diam[\\s]?))([\\d]?[\\s]?\\.[\\s]?[\\d]+)|([\\d]/[\\d])");
+		//Pattern pattern5 = Pattern.compile("[\\dï¿½\\+\\ï¿½\\-\\ï¿½ï¿½ï¿½:ï¿½/ï¿½\"ï¿½ï¿½\\_ï¿½\\×µ%\\*\\{\\}\\[\\]=]+");
+		//Pattern pattern5 = Pattern.compile("[\\d\\+ï¿½ï¿½ï¿½/ï¿½\"ï¿½ï¿½ï¿½\\×µ%\\*]+(?!~[a-z])");
+		Pattern pattern5 = Pattern.compile("[\\d\\+ï¿½ï¿½ï¿½/ï¿½\"ï¿½ï¿½ï¿½\\×µ%\\*]+(?![a-z])"); //single numbers, not including individual "-", would turn 3-branched to 3 branched 
 		//Pattern pattern6 = Pattern.compile("([\\s]*0[\\s]*)+(?!~[a-z])"); //condense multiple 0s.
 		Pattern pattern6 = Pattern.compile("(?<=\\s)[0\\s]+(?=\\s)");
-		//Pattern pattern5 = Pattern.compile("((?<!(/|(\\.[\\s]?)))[\\d]+[\\-\\–]+[\\d]+(?!([\\–\\-]+/|([\\s]?\\.))))|((?<!(\\{|/))[\\d]+(?!(\\}|/)))");
-		//[\\d±\\+\\–\\-\\—°.²:½/¼\"“”\\_;x´\\×\\s,µ%\\*\\{\\}\\[\\]=(<\\{)(\\}>)]+
+		//Pattern pattern5 = Pattern.compile("((?<!(/|(\\.[\\s]?)))[\\d]+[\\-\\ï¿½]+[\\d]+(?!([\\ï¿½\\-]+/|([\\s]?\\.))))|((?<!(\\{|/))[\\d]+(?!(\\}|/)))");
+		//[\\dï¿½\\+\\ï¿½\\-\\ï¿½ï¿½.ï¿½:ï¿½/ï¿½\"ï¿½ï¿½\\_;xï¿½\\ï¿½\\s,ï¿½%\\*\\{\\}\\[\\]=(<\\{)(\\}>)]+
 		Pattern pattern7 = Pattern.compile("[(\\[]\\s*\\d+\\s*[)\\]]"); // deal with ( 2 ), (23) is dealt with by NumericalHandler.numberpattern
 
 		Matcher	 matcher1 = NumericalHandler.numberpattern.matcher(str);
@@ -1322,7 +1322,7 @@ public class Utilities {
 
 
 		//3 -{many} or 3- {many}=> {3-many}
-		str = str.replaceAll("0\\s*-\\s*", "0-").replaceAll("0(?!~[a-z])", "3").replaceAll("3\\s*[–-]\\{", "{3-").replaceAll("±(?!~[a-z])","{moreorless}").replaceAll("±","moreorless"); //stanford parser gives different results on 0 and other numbers.
+		str = str.replaceAll("0\\s*-\\s*", "0-").replaceAll("0(?!~[a-z])", "3").replaceAll("3\\s*[ï¿½-]\\{", "{3-").replaceAll("ï¿½(?!~[a-z])","{moreorless}").replaceAll("ï¿½","moreorless"); //stanford parser gives different results on 0 and other numbers.
 
 		//2-or-{3-lobed} => {2-or-3-lobed}
 		str = str.replaceAll("(?<=-(to|or)-)\\{", "").replaceAll("[^\\{~]\\b(?=3-(to|or)-3\\S+\\})", " {"); //don't break {shape~list~lyrate~or~3-or-3-pinnatisect} to {shape~list~lyrate~or~ {3-or-3-pinnatisect}

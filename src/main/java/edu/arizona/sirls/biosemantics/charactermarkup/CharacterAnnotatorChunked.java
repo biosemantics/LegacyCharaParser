@@ -812,13 +812,13 @@ public class CharacterAnnotatorChunked {
 				//ArrayList<Element> es = processTVerb(ck.toString().replaceFirst("^b\\[", "").replaceFirst("\\]$", ""), CharacterAnnotatorChunked.subjects);
 				updateLatestElements(es);
 			}else if(ck instanceof ChunkComparativeValue){
-				//ArrayList<Element> chars = processComparativeValue(ck.toString().replaceAll("–", "-"), lastStructures());
+				//ArrayList<Element> chars = processComparativeValue(ck.toString().replaceAll("ï¿½", "-"), lastStructures());
 				String content = ck.toString();
 				ArrayList<Element> parents = this.attachToLast? lastStructures() : subjects;
 				if(printAttach && subjects.get(0).getAttributeValue("name").compareTo(lastStructures().get(0).getAttributeValue("name")) != 0){
 					System.out.println(content + " attached to "+parents.get(0).getAttributeValue("name"));
 				}
-				ArrayList<Element> chars = processComparativeValue(content.replaceAll("–", "-"), lastStructures(), cs);// 7-12-02 add cs
+				ArrayList<Element> chars = processComparativeValue(content.replaceAll("ï¿½", "-"), lastStructures(), cs);// 7-12-02 add cs
 				updateLatestElements(chars);
 			}else if(ck instanceof ChunkRatio){
 				//ArrayList<Element> chars = annotateNumericals(ck.toString(), "lwratio", "", lastStructures());
@@ -872,7 +872,7 @@ public class CharacterAnnotatorChunked {
 				//** find parents, modifiers
 				//TODO: check the use of [ and ( in extreme values
 				//ArrayList<Element> parents = lastStructures();
-				String text = ck.toString().replaceAll("–", "-");
+				String text = ck.toString().replaceAll("ï¿½", "-");
 				String character = null;
 				if(ck instanceof ChunkCount) character = "count";
 				if(ck instanceof ChunkMeasure){
@@ -900,7 +900,7 @@ public class CharacterAnnotatorChunked {
 					System.out.println();
 					System.out.println(">>>>>>>>>>>>>"+text);
 				}
-				String modifier1 = "";//m[mostly] [4-]8–12[-19] mm m[distally]; m[usually] 1.5-2 times n[size[{longer} than {wide}]]:consider a constraint
+				String modifier1 = "";//m[mostly] [4-]8ï¿½12[-19] mm m[distally]; m[usually] 1.5-2 times n[size[{longer} than {wide}]]:consider a constraint
 				String modifier2 = "";
 				modifier1 = text.replaceFirst("\\[?\\(?\\d.*$", "");
 				String rest = text.replace(modifier1, "");
@@ -1456,15 +1456,15 @@ public class CharacterAnnotatorChunked {
 	}
 	/**
 	 * 3 times n[...than...]
-	   lengths 0.5–0.6+ times <bodies>
+	   lengths 0.5ï¿½0.6+ times <bodies>
 	   ca .3.5 times length of <throat>
-       1–3 times {pinnately} {lobed}
-       1–2 times shape[{shape~list~pinnately~lobed~or~divided}]
+       1ï¿½3 times {pinnately} {lobed}
+       1ï¿½2 times shape[{shape~list~pinnately~lobed~or~divided}]
        4 times longer than wide
        
        
        
-	 * @param content: 0.5–0.6+ times a[type[bodies]]
+	 * @param content: 0.5ï¿½0.6+ times a[type[bodies]]
 	 * @param subjects2
 	 * @return
 	 */
@@ -1478,7 +1478,7 @@ public class CharacterAnnotatorChunked {
 		if(n.indexOf("constraint")>=0){
 			n = n.replaceFirst("constraint\\[", "").replaceFirst("\\]$", ""); //n holds times....
 		}
-		if(n.indexOf("n[")>=0 ){//1.5–2.5 times n[{longer} than (throat)]
+		if(n.indexOf("n[")>=0 ){//1.5ï¿½2.5 times n[{longer} than (throat)]
 			//content = "n["+content.replace("n[", "");
 			content = v.replaceFirst("(^| )(?=\\(?\\d)", " size[")+"] constraint["+n.replaceFirst("n\\[", "").trim(); //m[usually] 1.5-2
 			return this.processTHAN(content, parents, cs);// 7-12-02 add cs
@@ -1495,7 +1495,7 @@ public class CharacterAnnotatorChunked {
 			n = "constraint["+n.replaceAll("[o|l|z]\\[", ""); //times o[(bodies)] => constraint[times (bodies)]
 			content = "size["+v+"] "+n;
 			return this.processTHAN(content, parents, cs);// 7-12-02 add cs	
-		}else if(n.indexOf("a[")==0 || n.indexOf(" a[")>0 || n.indexOf("~list~")>0){ //characters:1–3 times {pinnately} {lobed}
+		}else if(n.indexOf("a[")==0 || n.indexOf(" a[")>0 || n.indexOf("~list~")>0){ //characters:1ï¿½3 times {pinnately} {lobed}
 			String times = n.substring(0, n.indexOf(' '));
 			n = n.substring(n.indexOf(' ')+1);
 			if(n.indexOf("~list~")>0){
@@ -2506,7 +2506,7 @@ public class CharacterAnnotatorChunked {
 				lastelement = this.latestelements.get(this.latestelements.size()-i);
 				i++;
 			}
-			if(lastelement.getName().compareTo("character")==0){//Valves concentrically strongly undulate with a diameter between 4-35 µm (Fig .198 )
+			if(lastelement.getName().compareTo("character")==0){//Valves concentrically strongly undulate with a diameter between 4-35 ï¿½m (Fig .198 )
 				ArrayList<Element> results = new ArrayList<Element>();
 				Iterator<Element> it = this.latestelements.iterator();
 				while(it.hasNext()){
@@ -2518,7 +2518,7 @@ public class CharacterAnnotatorChunked {
 				}
 				if(results.size()>0) this.updateLatestElements(results);
 				done = true;
-			}else if(lastelement.getName().compareTo("structure")==0){//Valves with a diameter 15 - 65 µm
+			}else if(lastelement.getName().compareTo("structure")==0){//Valves with a diameter 15 - 65 ï¿½m
 				ArrayList<Element> results = new ArrayList<Element>();
 				Iterator<Element> it = this.latestelements.iterator();
 				while(it.hasNext()){
@@ -2584,7 +2584,7 @@ public class CharacterAnnotatorChunked {
 			base = "each";
 		}
 		if(lastIsChara){
-			//if last character is size, change to location: <margins> r[p[with] o[3–6 (spines)]] 1–3 {mm} r[p[{near}] o[(bases)]]. 
+			//if last character is size, change to location: <margins> r[p[with] o[3ï¿½6 (spines)]] 1ï¿½3 {mm} r[p[{near}] o[(bases)]]. 
 			//1-3 mm is not a size, but a location of spines
 			if(lastelement.getAttributeValue("name").compareTo("size") == 0 && 
 					((lastelement.getAttributeValue("value")!=null && lastelement.getAttributeValue("value").matches(".*?\\d.*")) || (lastelement.getAttributeValue("from")!=null && lastelement.getAttributeValue("from").matches(".*?\\d.*")))
@@ -2841,7 +2841,7 @@ public class CharacterAnnotatorChunked {
 		}else if(object.indexOf(" (")>=0+0){
 			objectstart = object.indexOf(" (");
 			//do not separate a pair of brackets into two parts
-			part2 = object.substring(objectstart); //object='1–5(–15+) (series)'
+			part2 = object.substring(objectstart); //object='1ï¿½5(ï¿½15+) (series)'
 			part2 = part2.replaceFirst(" \\(", "~("); //to avoid match this bad object again in while loop
 			int left = part2.replaceAll("-L[RS]B-/-L[RS]B-", "#").replaceAll("[^#]", "").length();
 			int right = part2.replaceAll("-R[RS]B-/-R[RS]B-", "#").replaceAll("[^#]", "").length();;
@@ -3656,7 +3656,7 @@ public class CharacterAnnotatorChunked {
 	 */	
 	private Element annotatedMeasurements(String measurements, ChunkedSentence cs) {//added cs
 		measurements = measurements.replaceAll("([Ff]igure|[Ff]igs?\\.)[^A-Z]*", "");
-		measurements = measurements.replaceAll("–", "-");
+		measurements = measurements.replaceAll("ï¿½", "-");
 		Element whole  = new Element("whole_organism");
 		//this.statement.addContent(whole);
 		ArrayList<Element> parent = new ArrayList<Element>();
