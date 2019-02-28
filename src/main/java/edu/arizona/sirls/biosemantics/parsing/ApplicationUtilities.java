@@ -39,13 +39,18 @@ public class ApplicationUtilities {
 	
 	static {
 		try {
-						
+					
+			System.out.println(System.getProperty("user.dir")
+					+"/application.properties");
 		fstream = new FileInputStream(System.getProperty("user.dir")
 					+"/application.properties");
+		
 					
 		//fstream = ApplicationUtilities.class.getClassLoader().getResourceAsStream("application.properties");
 		//notepadstream = ApplicationUtilities.class.getClassLoader().getResourceAsStream("notepad.properties");
-		notepadstream = new BufferedInputStream(new FileInputStream(System.getProperty("user.dir")+"/notepad.properties"));	
+		//Removed by by Jing Liu
+	//	notepadstream = new BufferedInputStream(new FileInputStream(System.getProperty("user.dir")+"/notepad.properties"));	
+		//Removed by by Jing Liu
 		} //catch (FileNotFoundException e) {
 		catch (Exception e) {
 			LOGGER.error("couldn't open file in ApplicationUtilities:getProperties", e);
@@ -110,7 +115,9 @@ public class ApplicationUtilities {
 			properties = new Properties();
 			notepadproperties = new Properties();
 			try {
-				notepadproperties.load(notepadstream);
+				//Removed by by Jing Liu
+				//notepadproperties.load(notepadstream);
+				//Removed by by Jing Liu
 				properties.load(fstream);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

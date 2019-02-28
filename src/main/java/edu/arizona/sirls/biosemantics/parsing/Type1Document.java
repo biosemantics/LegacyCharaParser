@@ -59,7 +59,7 @@ public class Type1Document {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-/*		Type1Document td1 = new Type1Document();
+		Type1Document td1 = new Type1Document();
 		
 		do {
 			td1.showType1Document();
@@ -71,7 +71,7 @@ public class Type1Document {
 			
 		
 		//System.out.println("disposed :(");
-*/		
+	
 	}
 	
 	/**
