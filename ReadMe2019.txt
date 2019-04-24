@@ -1,0 +1,1 @@
+ReadMe1. The LegacyCharaparser runs on 32 bit Windows. If you need to run it on MacOS or 64 bit Windows, you should include the corresponding swt jar file in the library.2. Run “Configuration” from “package edu.arizona.sirls.biosemantics.parsing;”3. In the “Choose the document type” window, choose the type of the document you are going to process.4. Go on with the prompt.
